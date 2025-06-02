@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // 从环境变量获取后端 API 地址
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://prompts.api.ru0t1an.com'; // 默认服务器
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://101.126.132.158:10721/'; // 默认服务器
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
