@@ -2,12 +2,13 @@
 import axios from 'axios';
 
 // 从环境变量获取后端 API 地址
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000'; // 默认本地开发
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://101.126.132.158:10721/'; // 默认服务器
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,
   withCredentials: true, // 允许跨域发送 cookies (用于管理员会话)
 });
+
 
 /**
  * 获取页面布局配置。
