@@ -1,6 +1,8 @@
+// frontend/src/index.js
+// 版本: V9 (确认 React 18 Root API)
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import ReactDOM from 'react-dom/client'; // 确保从 'react-dom/client' 导入
+import './index.css'; // 你的全局样式
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
@@ -11,7 +13,4 @@ root.render(
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
