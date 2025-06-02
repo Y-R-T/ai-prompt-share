@@ -1,18 +1,18 @@
 // frontend/src/App.js
+// 版本: V53
+// 修改目的: 移除未使用的 navigate 变量以解决 ESLint 警告，使其能通过 CI 构建。
+// 修改内容: 注释掉或删除 useNavigate 的导入和 navigate 常量的初始化。
+
 import React, { useState, useEffect, useCallback } from 'react';
-import { BrowserRouter as Router, useLocation, useNavigate } from 'react-router-dom';
-// 【V5 修改】从 react-helmet-async 导入 HelmetProvider
-// 修改版本: V5
-// 修改目的: 解决 HelmetProvider is not defined 错误。
-// 修改内容: 添加 HelmetProvider 的 import 语句。
-import { Helmet, HelmetProvider } from 'react-helmet-async'; // <--- 添加 HelmetProvider
+// 【V53 修改】如果 navigate 确实未使用，则移除 useNavigate 导入
+import { BrowserRouter as Router, useLocation /*, useNavigate */ } from 'react-router-dom'; 
+import { Helmet, HelmetProvider } from 'react-helmet-async'; 
 
 import { getPageLayout, getPromptDetails } from './services/api';
 import { getComponent } from './utils/componentRegistry';
 import PromptDetailModal from './components/prompts/PromptDetailModal';
 import GlobalSpinner from './components/common/GlobalSpinner';
 
-// ... MainApp 组件的代码保持不变 ...
 function MainApp() {
   const [pageLayout, setPageLayout] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -21,7 +21,8 @@ function MainApp() {
   const [modalPromptData, setModalPromptData] = useState(null);
   
   const location = useLocation(); 
-  const navigate = useNavigate(); 
+  // 【V53 修改】如果 navigate 确实未使用，则注释或删除此行
+  // const navigate = useNavigate(); 
 
   const handleOpenPromptDetail = useCallback(async (promptId) => {
     try {
@@ -69,6 +70,7 @@ function MainApp() {
   const renderDynamicComponent = (config, key, passThroughProps = {}) => {
     if (!config || !config.component) return null;
     const ComponentToRender = getComponent(config.component);
+    // Pass openPromptDetail down so child components can trigger the modal
     const combinedProps = { ...config.props, ...passThroughProps, openPromptDetail: handleOpenPromptDetail };
     return <ComponentToRender key={key || config.id} {...combinedProps} />;
   };
@@ -123,13 +125,12 @@ function MainApp() {
   );
 }
 
-
-// App 组件包裹 Router 和 HelmetProvider
+// App component wraps Router and HelmetProvider
 function App() {
   return (
     <Router>
-      {/* HelmetProvider 包裹所有可能使用 Helmet 的组件 */}
-      <HelmetProvider> {/* <--- HelmetProvider 在这里使用 */}
+      {/* HelmetProvider should wrap all components that might use Helmet */}
+      <HelmetProvider> 
         <MainApp />
       </HelmetProvider>
     </Router>
