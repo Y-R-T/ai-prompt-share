@@ -8,6 +8,7 @@ import HeroBanner from '../components/common/HeroBanner';
 import FilterList from '../components/common/FilterList';
 import TagCloud from '../components/common/TagCloud';
 import SearchBar from '../components/common/SearchBar'; // 我们会创建这个组件
+import SimplePromptList from '../components/common/SimplePromptList';
 
 // --- 内容展示组件 ---
 import GridDisplay from '../components/display/GridDisplay';
@@ -29,6 +30,7 @@ const componentRegistry = {
   FilterList,
   TagCloud,
   SearchBar, // 添加 SearchBar
+  SimplePromptList,
 
   // 展示容器
   GridDisplay,
